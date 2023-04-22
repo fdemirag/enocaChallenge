@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.enoca.challenge.Dto.CountryDto;
 import com.enoca.challenge.ServiceImpl.CountryService;
 import com.enoca.challenge.model.Country;
 
@@ -29,19 +30,19 @@ public class CountryController {
 		}
 	 	
 		@GetMapping("getAll")
-		public List<Country> getAllCountries(Country country){ 
+		public List<CountryDto> getAllCountries(CountryDto country){ 
 			return countryService.getAllCountries();
 		}
 		@GetMapping ("get/{id}")
-		public Country getcountryById(@PathVariable long id) {
-			return countryService.getcountryById(id);
+		public CountryDto getcountryById(@PathVariable long id) {
+			return countryService.getCountryById(id);
 		}
 		@PutMapping ("update/{id}")
-			public Country updateCountry(@RequestBody Country country, @PathVariable long id){	
+			public CountryDto updateCountry(@RequestBody CountryDto country, @PathVariable long id){	
 			return countryService.updateCountry(country, id);
 	}
 		@PostMapping("create")
-		public Country saveCountry(@RequestBody Country country) { 
+		public CountryDto saveCountry(@RequestBody CountryDto country) { 
 			return countryService.saveCountry(country);
 		}
 		@DeleteMapping("delete/{id}")
@@ -49,7 +50,7 @@ public class CountryController {
 			countryService.deleteCountry(id);
 		}
 		@GetMapping("getName/{name}")
-		public List<Country> getByNameContaining(@PathVariable String name){
+		public List<CountryDto> getByNameContaining(@PathVariable String name){
 			return countryService.getByNameContaining(name);
 		}
 		

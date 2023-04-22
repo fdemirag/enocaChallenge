@@ -9,4 +9,5 @@ import com.enoca.challenge.model.Country;
 
 public interface ICountryRepository extends JpaRepository<Country, Long>{
 	public List<Country> findByNameContaining(String name);
+	
 }

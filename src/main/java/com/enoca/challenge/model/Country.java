@@ -1,9 +1,11 @@
 package com.enoca.challenge.model;
 
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,61 +17,30 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="countries")
-public class Country {
+public class Country extends BaseEntity{
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
-	@Column (name="name")
-	private String name;
-	@Column(name="region")
-	private String region;
+	
+
 	@Column(name="countrycode")
 	private String countrycode;
 	
 	
-	//@JsonIgnore
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="country")
-	private List<City> city;
 	
 	
 	
+	 @OneToMany(mappedBy = "country",fetch=FetchType.EAGER)
+	    private List<City> city;
 	
 	
 	public Country() {}
 
 	public Country(long id, String name, String region, String countrycode, List<City> city) {
-		
-		this.id = id;
-		this.name = name;
-		this.region = region;
+		super();
 		this.countrycode = countrycode;
 		this.city = city;
 	}
 
-	public long getId() {
-		return id;
-	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
 
 	public String getCountrycode() {
 		return countrycode;

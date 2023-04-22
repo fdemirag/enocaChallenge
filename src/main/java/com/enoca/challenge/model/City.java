@@ -15,68 +15,36 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="cities")
-public class City {
-
+public class City extends BaseEntity {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
-	@Column(name="name")
-	private String name;
-	@Column(name="region")
-	private String region;
+
 	@Column(name="population")
 	private long population;
 	
-	
 	@JsonIgnore
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="country_id") 
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name = "country_id")
 	private Country country;
 	
-	
+	@JsonIgnore
+	private long idOfCountry; 
+
 	public City() {}
 
 
-	public City(long id, String name, String region, long population, Country country) {
-		
-		this.id = id;
-		this.name = name;
-		this.region = region;
+	public City(long id, String name, String region, long population, Country country,long idOfCountry) {
+		super();
 		this.population = population;
 		this.country = country;
 	}
-
-
-	public long getId() {
-		return id;
+	
+	public long getIdOfCountry() {
+		return idOfCountry;
 	}
 
-
-	public void setId(long id) {
-		this.id = id;
+	public void setIdOfCountry(long idOfCountry) {
+		this.idOfCountry = idOfCountry;
 	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public String getRegion() {
-		return region;
-	}
-
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
 
 	public long getPopulation() {
 		return population;
